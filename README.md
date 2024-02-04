@@ -413,35 +413,3 @@ I also bought a heap of Xiaomi Miji 1080p IP Cameras thinking they could be hack
 <hr --- </hr>
 <hr --- </hr>
 
-<h3 align="left">My Favourite Resources</h3> 
-
-<p align="left">I used the below links for inspiration, configuration help and I recommend a visit to them if you haven't already.</p>
-
-[CCOSTAN](https://github.com/CCOSTAN/Home-AssistantConfig) - There is a reason this guys Repo is the most starred out there, his Repo layout was an inspiration for me to start this one and you will see a lot of similarities in my layout as a result. Whilst I don't yet use Docker or Floorplan this is the first place I will coming back to once I move in that direction. His use of TTS is awesome and very creative and I took alot of my TTS from this. His whole setup is very impressive and if you haven't already head over to his repo give it a star and get inspired.
-
-[stanvx](https://github.com/stanvx/Home-Assistant-Configuration) - Another I visit regularly is stanvx he uses alot of Xiaomi products and he has really good examples for those looking for automation ideas.
-
-[notoriousbdg](https://github.com/notoriousbdg/hassio-addons) - As mentioned above notoriousbdg has a great repo with add-ons for Node-Red, HA Bridge & Gogs.
-
-[BRUH Automation](https://www.youtube.com/channel/UCLecVrux63S6aYiErxdiy4w) - Great place for video tutorials on HA related guides.
-
-[DrZzs](https://www.youtube.com/channel/UC7G4tLa4Kt6A9e3hJ-HO8ng) - For anyone wanting to use Sonoff switches plenty of useful guides.
-
-[HA Podcast](https://hasspodcast.io/) - I didn't mention above but I have an automation to send me a tasker notification that there is a new HA release, so that the next time I am driving to work I can say "ok google" play the latest home asssitant podcast. Nice way to keep abreast of what changes are coming in the latest release and if there is anything I would like to take advantage of. 
-<hr --- </hr>
-
-<h3 align="left">My Favourite Projects</h3> 
-
-<p align="left">I used the below links for intergration into my own HA or I plan to at some point in the future.</p>
-
-[HA UI Themes](https://community.home-assistant.io/t/share-your-themes/22018/100)<br>
-[Custom UI Tiles](https://community.home-assistant.io/t/share-your-themes/22018/100)<br>
-[Sonoff-HA](https://community.home-assistant.io/t/sonoff-homeassistant-alternative-firmware-for-sonoff-switches-for-use-with-mqtt-ha/2332/308)<br>
-[Spotify Playlist Player](https://community.home-assistant.io/t/spotify-playlist-player/22491/67)<br>
-[MQTT Alarm Panel](https://community.home-assistant.io/t/mqtt-alarm-control-panel-for-raspberry-pi-and-android/26484)<br>
-[Better Looking Device Tracker](https://community.home-assistant.io/t/better-looking-device-tracker/27281)<br>
-[Alexa as a Media Player](https://community.home-assistant.io/t/echo-devices-alexa-as-media-player-testers-needed/58639)<br>
-[Zoned Cleaning Xiaomi](https://community.home-assistant.io/t/howto-xiaomi-vacuum-zoned-cleaning/51293)<br>
-<a>**More to come as I can remember them**<a name="bottom" href="https://github.com/JamesMcCarthy79/Home-Assistant-Config/blob/master/README.md#kingia-castle-smart-home-configuration"><img align="right" border="0" src="https://github.com/JamesMcCarthy79/Home-Assistant-Config/blob/master/HA%20Pics/Back%20to%20the%20Top.png" width="45" ></a><br>
-<hr --- </hr>
-<hr --- </hr>
