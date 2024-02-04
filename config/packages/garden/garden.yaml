@@ -1,0 +1,817 @@
+#################################################################
+#                                                               #
+#                       Packages/Garden                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    sensor.bougainvillea_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.bougainvillea_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.bougainvillea_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.bougainvillea_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+  
+    sensor.star_jasmine_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.star_jasmine_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.star_jasmine_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.star_jasmine_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+  
+    sensor.peach_bougainvillea_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.peach_bougainvillea_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.peach_bougainvillea_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.peach_bougainvillea_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+  
+    sensor.front_door_plant_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.front_door_plant_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.front_door_plant_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.front_door_plant_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+  
+    sensor.veggie_patch_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.veggie_patch_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.veggie_patch_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.veggie_patch_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+  
+    sensor.top_bed_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.top_bed_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.top_bed_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.top_bed_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+  
+    sensor.citrus_bed_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.citrus_bed_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.citrus_bed_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.citrus_bed_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.dracaena_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.dracaena_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.dracaena_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.dracaena_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.bathroom_fern_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.bathroom_fern_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.bathroom_fern_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.bathroom_fern_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.frangipani_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.frangipani_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.frangipani_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.frangipani_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.fiddle_leaf_fig_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.fiddle_leaf_fig_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.fiddle_leaf_fig_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.fiddle_leaf_fig_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.hydrangea_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.hydrangea_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.hydrangea_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.hydrangea_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.peace_lily_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.peace_lily_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.peace_lily_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.peace_lily_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.proteas_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.proteas_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.proteas_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.proteas_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.red_maple_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.red_maple_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.red_maple_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.red_maple_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+      
+    sensor.rose_moisture:
+      icon: mdi:water
+      friendly_name: Moisture
+    sensor.rose_light_intensity:
+      icon: mdi:white-balance-sunny
+      friendly_name: Light Intensity
+    sensor.rose_conductivity:
+      icon: mdi:emoticon-poop
+      friendly_name: Conductivity
+    sensor.rose_temperature:
+      icon: mdi:thermometer
+      friendly_name: Temperature
+
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
+
+group:
+  lounge_plants:
+    entities:
+      - plant.lounge_plant
+      - plant.fiddle_leaf_fig
+
+  entry_plants:
+    entities:
+      - plant.front_flower_pot
+      - plant.front_door_plant
+
+      
+#################################################################
+#                                                               #
+#                       Plant Monitors                          #
+#                                                               #
+#################################################################
+
+plant:
+  Bougainvillea:
+    sensors:
+      moisture: sensor.bougainvillea_moisture
+      battery: sensor.bougainvillea_battery
+      temperature: sensor.bougainvillea_temperature
+      conductivity: sensor.bougainvillea_conductivity
+      brightness: sensor.bougainvillea_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 5
+    max_temperature: 35
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 3000
+    max_brightness: 70000
+    
+  Hydrangea:
+    sensors:
+      moisture: sensor.hydrangea_moisture
+      battery: sensor.hydrangea_battery
+      temperature: sensor.hydrangea_temperature
+      conductivity: sensor.hydrangea_conductivity
+      brightness: sensor.hydrangea_light
+    min_moisture: 20
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 6
+    max_temperature: 35
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 1000
+    max_brightness: 30000
+    
+  Star Jasmine:
+    sensors:
+      moisture: sensor.star_jasmine_moisture
+      battery: sensor.star_jasmine_battery
+      temperature: sensor.star_jasmine_temperature
+      conductivity: sensor.star_jasmine_conductivity
+      brightness: sensor.star_jasmine_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 10
+    max_temperature: 30
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 1200
+    max_brightness: 18000
+    
+  Veggie Patch:
+    sensors:
+      moisture: sensor.veggie_patch_moisture
+      battery: sensor.veggie_patch_battery
+      temperature: sensor.veggie_patch_temperature
+      conductivity: sensor.veggie_patch_conductivity
+      brightness: sensor.veggie_patch_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 8
+    max_temperature: 32
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 2500
+    max_brightness: 60000
+    
+  Flower Bed:
+    sensors:
+      moisture: sensor.flower_bed_moisture
+      battery: sensor.flower_bed_battery
+      temperature: sensor.flower_bed_temperature
+      conductivity: sensor.flower_bed_conductivity
+      brightness: sensor.flower_bed_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 5
+    max_temperature: 35
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 3000
+    max_brightness: 60000
+    
+  Citrus Bed:
+    sensors:
+      moisture: sensor.citrus_bed_moisture
+      battery: sensor.citrus_bed_battery
+      temperature: sensor.citrus_bed_temperature
+      conductivity: sensor.citrus_bed_conductivity
+      brightness: sensor.citrus_bed_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 8
+    max_temperature: 35
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 4000
+    max_brightness: 65000
+    
+  Lounge Plant:
+    sensors:
+      moisture: sensor.dracaena_moisture
+      battery: sensor.dracaena_battery
+      temperature: sensor.dracaena_temperature
+      conductivity: sensor.dracaena_conductivity
+      brightness: sensor.dracaena_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 10
+    max_temperature: 35
+    min_conductivity: 200
+    max_conductivity: 1500
+    min_brightness: 2000
+    max_brightness: 50000
+    
+  Fiddle Leaf Fig:
+    sensors:
+      moisture: sensor.fiddle_leaf_fig_moisture
+      battery: sensor.fiddle_leaf_fig_battery
+      temperature: sensor.fiddle_leaf_fig_temperature
+      conductivity: sensor.fiddle_leaf_fig_conductivity
+      brightness: sensor.fiddle_leaf_fig_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 12
+    max_temperature: 32
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 1500
+    max_brightness: 45000
+    
+  Front Door Plant:
+    sensors:
+      moisture: sensor.front_door_plant_moisture
+      battery: sensor.front_door_plant_battery
+      temperature: sensor.front_door_plant_temperature
+      conductivity: sensor.front_door_plant_conductivity
+      brightness: sensor.front_door_plant_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 5
+    max_temperature: 35
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 3000
+    max_brightness: 70000
+
+  Front Flower Pot:
+    sensors:
+      moisture: sensor.front_flower_pot_moisture
+      battery: sensor.front_flower_pot_battery
+      temperature: sensor.front_flower_pot_temperature
+      conductivity: sensor.front_flower_pot_conductivity
+      brightness: sensor.front_flower_pot_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 5
+    max_temperature: 35
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_brightness: 1500
+    max_brightness: 40000
+    
+  Climbing Rose:
+    sensors:
+      moisture: sensor.rose_moisture
+      battery: sensor.rose_battery
+      temperature: sensor.rose_temperature
+      conductivity: sensor.rose_conductivity
+      brightness: sensor.rose_light
+    min_moisture: 15
+    max_moisture: 75
+    min_battery: 15
+    min_temperature: 8
+    max_temperature: 35
+    min_conductivity: 425
+    max_conductivity: 2000
+    min_brightness: 3000
+    max_brightness: 60000
+    
+  Rose Garden:
+    sensors:
+      moisture: sensor.rose_garden_moisture
+      battery: sensor.rose_garden_battery
+      temperature: sensor.rose_garden_temperature
+      conductivity: sensor.rose_garden_conductivity
+      brightness: sensor.rose_garden_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 5
+    max_temperature: 32
+    min_conductivity: 200
+    max_conductivity: 2000
+    min_brightness: 3500
+    max_brightness: 65000
+
+  Proteas:
+    sensors:
+      moisture: sensor.proteas_moisture
+      battery: sensor.proteas_battery
+      temperature: sensor.proteas_temperature
+      conductivity: sensor.proteas_conductivity
+      brightness: sensor.proteas_light
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 15
+    min_temperature: 7
+    max_temperature: 35
+    min_conductivity: 200
+    max_conductivity: 2000
+    min_brightness: 2500
+    max_brightness: 65000
+
+#################################################################
+#                                                               #
+#                          Sensors                              #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                  Sensors - MQTT                  #
+#                                                  #
+####################################################
+
+  - platform: mqtt
+    name: Dracaena Battery
+    state_topic: "miflora/dracaena_battery"
+
+  - platform: mqtt
+    name: Dracaena Light
+    state_topic: "miflora/dracaena_light"
+
+  - platform: mqtt
+    name: Dracaena Temperature
+    state_topic: "miflora/dracaena_temperature"
+
+  - platform: mqtt
+    name: Dracaena Moisture
+    state_topic: "miflora/dracaena_moisture"
+
+  - platform: mqtt
+    name: Dracaena Conductivity
+    state_topic: "miflora/dracaena_conductivity"
+
+  - platform: mqtt
+    name: Dracaena Firmware
+    state_topic: "miflora/dracaena_firmware"
+
+  - platform: mqtt
+    name: Dracaena Last Report
+    state_topic: "miflora/dracaena_last_report"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Battery
+    state_topic: "miflora/fiddle_leaf_fig_battery"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Light
+    state_topic: "miflora/fiddle_leaf_fig_light"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Temperature
+    state_topic: "miflora/fiddle_leaf_fig_temperature"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Moisture
+    state_topic: "miflora/fiddle_leaf_fig_moisture"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Conductivity
+    state_topic: "miflora/fiddle_leaf_fig_conductivity"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Firmware
+    state_topic: "miflora/fiddle_leaf_fig_firmware"
+
+  - platform: mqtt
+    name: Fiddle Leaf Fig Last Report
+    state_topic: "miflora/fiddle_leaf_fig_last_report"
+
+  - platform: mqtt
+    name: Front Door Plant Battery
+    state_topic: "miflora/front_door_plant_battery"
+
+  - platform: mqtt
+    name: Front Door Plant Light
+    state_topic: "miflora/front_door_plant_light"
+
+  - platform: mqtt
+    name: Front Door Plant Temperature
+    state_topic: "miflora/front_door_plant_temperature"
+
+  - platform: mqtt
+    name: Front Door Plant Moisture
+    state_topic: "miflora/front_door_plant_moisture"
+
+  - platform: mqtt
+    name: Front Door Plant Conductivity
+    state_topic: "miflora/front_door_plant_conductivity"
+
+  - platform: mqtt
+    name: Front Door Plant Firmware
+    state_topic: "miflora/front_door_plant_firmware"
+
+  - platform: mqtt
+    name: Front Door Plant Last Report
+    state_topic: "miflora/front_door_plant_last_report"
+
+  - platform: mqtt
+    name: Rose Garden Battery
+    state_topic: "miflora/rose_garden_battery"
+
+  - platform: mqtt
+    name: Rose Garden Light
+    state_topic: "miflora/rose_garden_light"
+
+  - platform: mqtt
+    name: Rose Garden Temperature
+    state_topic: "miflora/rose_garden_temperature"
+
+  - platform: mqtt
+    name: Rose Garden Moisture
+    state_topic: "miflora/rose_garden_moisture"
+
+  - platform: mqtt
+    name: Rose Garden Conductivity
+    state_topic: "miflora/rose_garden_conductivity"
+
+  - platform: mqtt
+    name: Rose Garden Firmware
+    state_topic: "miflora/rose_garden_firmware"
+
+  - platform: mqtt
+    name: Rose Garden Last Report
+    state_topic: "miflora/rose_garden_last_report"
+
+  - platform: mqtt
+    name: Front Flower Pot Battery
+    state_topic: "miflora/front_flower_pot_battery"
+
+  - platform: mqtt
+    name: Front Flower Pot Light
+    state_topic: "miflora/front_flower_pot_light"
+
+  - platform: mqtt
+    name: Front Flower Pot Temperature
+    state_topic: "miflora/front_flower_pot_temperature"
+
+  - platform: mqtt
+    name: Front Flower Pot Moisture
+    state_topic: "miflora/front_flower_pot_moisture"
+
+  - platform: mqtt
+    name: Front Flower Pot Conductivity
+    state_topic: "miflora/front_flower_pot_conductivity"
+
+  - platform: mqtt
+    name: Front Flower Pot Firmware
+    state_topic: "miflora/front_flower_pot_firmware"
+
+  - platform: mqtt
+    name: Front Flower Pot Last Report
+    state_topic: "miflora/front_flower_pot_last_report"
+
+  - platform: mqtt
+    name: Bougainvillea Battery
+    state_topic: "miflora/bougainvillea_battery"
+
+  - platform: mqtt
+    name: Bougainvillea Light
+    state_topic: "miflora/bougainvillea_light"
+
+  - platform: mqtt
+    name: Bougainvillea Temperature
+    state_topic: "miflora/bougainvillea_temperature"
+
+  - platform: mqtt
+    name: Bougainvillea Moisture
+    state_topic: "miflora/bougainvillea_moisture"
+
+  - platform: mqtt
+    name: Bougainvillea Conductivity
+    state_topic: "miflora/bougainvillea_conductivity"
+
+  - platform: mqtt
+    name: Bougainvillea Firmware
+    state_topic: "miflora/bougainvillea_firmware"
+
+  - platform: mqtt
+    name: Bougainvillea Last Report
+    state_topic: "miflora/bougainvillea_last_report"
+
+  - platform: mqtt
+    name: Star Jasmine Battery
+    state_topic: "miflora/star_jasmine_battery"
+  
+  - platform: mqtt
+    name: Star Jasmine Light
+    state_topic: "miflora/star_jasmine_light"
+
+  - platform: mqtt
+    name: Star Jasmine Temperature
+    state_topic: "miflora/star_jasmine_temperature"
+
+  - platform: mqtt
+    name: Star Jasmine Moisture
+    state_topic: "miflora/star_jasmine_moisture"
+
+  - platform: mqtt
+    name: Star Jasmine Conductivity
+    state_topic: "miflora/star_jasmine_conductivity"
+
+  - platform: mqtt
+    name: Star Jasmine Firmware
+    state_topic: "miflora/star_jasmine_firmware"
+
+  - platform: mqtt
+    name: Star Jasmine Last Report
+    state_topic: "miflora/star_jasmine_last_report"
+
+  - platform: mqtt
+    name: Flower Bed Battery
+    state_topic: "miflora/flower_bed_battery"
+  
+  - platform: mqtt
+    name: Flower Bed Light
+    state_topic: "miflora/flower_bed_light"
+
+  - platform: mqtt
+    name: Flower Bed Temperature
+    state_topic: "miflora/flower_bed_temperature"
+
+  - platform: mqtt
+    name: Flower Bed Moisture
+    state_topic: "miflora/flower_bed_moisture"
+
+  - platform: mqtt
+    name: Flower Bed Conductivity
+    state_topic: "miflora/flower_bed_conductivity"
+
+  - platform: mqtt
+    name: Flower Bed Firmware
+    state_topic: "miflora/flower_bed_firmware"
+
+  - platform: mqtt
+    name: Flower Bed Last Report
+    state_topic: "miflora/flower_bed_last_report"
+
+  - platform: mqtt
+    name: Citrus Bed Battery
+    state_topic: "miflora/citrus_bed_battery"
+  
+  - platform: mqtt
+    name: Citrus Bed Light
+    state_topic: "miflora/citrus_bed_light"
+
+  - platform: mqtt
+    name: Citrus Bed Temperature
+    state_topic: "miflora/citrus_bed_temperature"
+
+  - platform: mqtt
+    name: Citrus Bed Moisture
+    state_topic: "miflora/citrus_bed_moisture"
+
+  - platform: mqtt
+    name: Citrus Bed Conductivity
+    state_topic: "miflora/citrus_bed_conductivity"
+
+  - platform: mqtt
+    name: Citrus Bed Firmware
+    state_topic: "miflora/citrus_bed_firmware"
+
+  - platform: mqtt
+    name: Citrus Bed Last Report
+    state_topic: "miflora/citrus_bed_last_report"
+
+  - platform: mqtt
+    name: Proteas Battery
+    state_topic: "miflora/proteas_battery"
+  
+  - platform: mqtt
+    name: Proteas Light
+    state_topic: "miflora/proteas_light"
+
+  - platform: mqtt
+    name: Proteas Temperature
+    state_topic: "miflora/proteas_temperature"
+
+  - platform: mqtt
+    name: Proteas Moisture
+    state_topic: "miflora/proteas_moisture"
+
+  - platform: mqtt
+    name: Proteas Conductivity
+    state_topic: "miflora/proteas_conductivity"
+
+  - platform: mqtt
+    name: Proteas Firmware
+    state_topic: "miflora/proteas_firmware"
+
+  - platform: mqtt
+    name: Proteas Last Report
+    state_topic: "miflora/proteas_last_report"
+
+  - platform: mqtt
+    name: Hydrangea Light
+    state_topic: "miflora/hydrangea_light"
+
+  - platform: mqtt
+    name: Hydrangea Battery
+    state_topic: "miflora/hydrangea_battery"
+  
+  - platform: mqtt
+    name: Hydrangea Temperature
+    state_topic: "miflora/hydrangea_temperature"
+
+  - platform: mqtt
+    name: Hydrangea Moisture
+    state_topic: "miflora/hydrangea_moisture"
+
+  - platform: mqtt
+    name: Hydrangea Conductivity
+    state_topic: "miflora/hydrangea_conductivity"
+
+  - platform: mqtt
+    name: Hydrangea Firmware
+    state_topic: "miflora/hydrangea_firmware"
+
+  - platform: mqtt
+    name: Hydrangea Last Report
+    state_topic: "miflora/hydrangea_last_report"
+
+  - platform: mqtt
+    name: Veggie Patch Battery
+    state_topic: "miflora/veggie_patch_battery"
+  
+  - platform: mqtt
+    name: Veggie Patch Light
+    state_topic: "miflora/veggie_patch_light"
+
+  - platform: mqtt
+    name: Veggie Patch Temperature
+    state_topic: "miflora/veggie_patch_temperature"
+
+  - platform: mqtt
+    name: Veggie Patch Moisture
+    state_topic: "miflora/veggie_patch_moisture"
+
+  - platform: mqtt
+    name: Veggie Patch Conductivity
+    state_topic: "miflora/veggie_patch_conductivity"
+
+  - platform: mqtt
+    name: Veggie Patch Firmware
+    state_topic: "miflora/veggie_patch_firmware"
+
+  - platform: mqtt
+    name: Veggie Patch Last Report
+    state_topic: "miflora/veggie_patch_last_report"

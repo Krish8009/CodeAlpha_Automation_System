@@ -1,0 +1,528 @@
+#################################################################
+#                                                               #
+#                      Packages/Lighting                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+## Light Switches
+    switch.front_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Front Light"
+    switch.lounge_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Lounge Light"
+    switch.hall_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Hall Light"
+    switch.kitchen_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Kitchen"
+    switch.dining_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Dining Light"
+    switch.patio_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Patio Light"
+    switch.master_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Master Light"
+    switch.master_wardrobe_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Walk In Light"
+    switch.jackson_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Jackson Light"
+    switch.hudson_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Hudson Light"
+    switch.bathroom_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: "Light"
+    switch.bathroom_fan_switch:
+      icon: 'mdi:fan'
+      friendly_name: "Fan"
+    switch.bathroom_heat_switch:
+      icon: 'mdi:fire'
+      friendly_name: "Heat"
+    switch.fairy_light_power:
+      icon: mdi:lightbulb
+      friendly_name: Fairy Lighting
+      assumed_state: false
+    switch.fairy_light_mode_4:
+      icon: mdi:lightbulb-on-outline
+      friendly_name: Fairy Flash Mode
+      assumed_state: false
+    light.gateway_light_7811dcfd812f:
+      friendly_name: TV Back Light
+    light.gateway_light_7811dce13ad6:
+      friendly_name: PC Back Light
+    switch.plug_158d0001f24e2b:
+      friendly_name: Entertainment Lighting
+    group.downstairs_lights:
+      icon: 'fas:lightbulb'
+    group.upstairs_lights:
+      icon: 'fas:lightbulb'
+    light.lounge_bulb:
+      icon: 'fas:lightbulb'
+    light.dining_bulb:
+      icon: 'fas:lightbulb'
+    switch.laundry_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: 'Laundry'
+    switch.playroom_light_switch:
+      icon: 'fas:lightbulb'
+      friendly_name: 'Playroom'
+    light.entrance_bulb:
+      icon: 'fas:lightbulb' 
+    light.patio_bulb:
+      icon: 'fas:lightbulb' 
+          
+      
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
+
+group:
+  downstairs lights:
+    name: Downstairs Lights
+    view: no
+    entities:
+      - switch.lounge_light_switch
+      - switch.kitchen_light_switch
+      - switch.dining_light_switch
+      - switch.playroom_light_switch
+      - switch.laundry_light_switch
+      
+  living room lights:
+    name: Living Room Lights
+    view: no
+    entities:
+      - switch.lounge_light_switch
+      - switch.kitchen_light_switch
+      - switch.dining_light_switch
+      
+  outside lights:
+    name: Outside Lights
+    view: no
+    entities:
+      - switch.patio_light_switch
+      - light.entrance_bulb
+      
+  bedroom lights:
+    name: Bedroom Lights
+    view: no
+    entities:
+      - switch.master_light_switch
+      - switch.master_wardrobe_switch
+      
+  bathroom switches:
+    name: Bathroom Switches
+    view: no
+    entities:
+      - switch.bathroom_light_switch
+      - switch.bathroom_fan_switch
+      - switch.bathroom_heat_switch
+      
+  upstairs lights:
+    name: Upstairs Lights
+    view: no
+    entities:
+      - switch.master_light_switch
+      - switch.bedroom_wardrobe_switch
+      - switch.bathroom_light_switch
+      - switch.bathroom_fan_switch
+      - switch.bathroom_heat_switch
+      - switch.upstairs_toilet_light_switch
+      - switch.jackson_light_switch
+      
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+      
+binary_sensor:
+  - platform: template
+    sensors:
+      lights:
+        friendly_name: Lights
+        device_class: light
+        entity_id: group.downstairs_lights
+        value_template: "{{ is_state('group.downstairs_lights', 'on') }}"
+        icon_template: >-
+          {% if is_state('group.downstairs_lights', 'on') %}
+            fas:lightbulb
+          {% elif is_state('group.downstairs_lights', 'off') %}
+            fas:lightbulb       
+          {% else %}
+            mdi:alert
+          {% endif %}
+          
+      outside_lights:
+        friendly_name: Lights
+        device_class: light
+        entity_id: group.outside_lights
+        value_template: "{{ is_state('group.outside_lights', 'on') }}"
+        icon_template: >-
+          {% if is_state('group.outside_lights', 'on') %}
+            fas:lightbulb
+          {% elif is_state('group.outside_lights', 'off') %}
+            fas:lightbulb       
+          {% else %}
+            mdi:alert
+          {% endif %}
+          
+#################################################################
+#                                                               #
+#                           Inputs                              #
+#                                                               #
+#################################################################
+
+input_number:
+  lounge_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  dining_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  hall_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  bedroom_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  gateway1_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+    
+  gateway2_brightness:
+    name: Brightness
+    initial: 254
+    min: 0
+    max: 254
+    step: 1
+      
+#################################################################
+#                                                               #
+#                           Lights                              #
+#                                                               #
+#################################################################
+
+light:
+
+####################################################
+#                                                  #
+#                  Lights - MQTT                   #
+#                                                  #
+####################################################
+  
+  - platform: mqtt
+    name: "Upstairs Toilet Bulb"
+    state_topic: "stat/sonoff-light-toilet/POWER"
+    command_topic: "cmnd/sonoff-light-toilet/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: false
+
+####################################################
+#                                                  #
+#                Lights - Phillips                 #
+#                                                  #
+####################################################
+
+  - platform: xiaomi_miio
+    name: Entrance Bulb
+    host: !secret xiaomi_bulb_1
+    token: !secret xiaomi_bulb_1_token
+    model: philips.light.bulb
+  
+  - platform: xiaomi_miio
+    name: Spare Bulb - 1
+    host: !secret xiaomi_bulb_2
+    token: !secret xiaomi_bulb_2_token
+    model: philips.light.bulb
+  
+  - platform: xiaomi_miio
+    name: Dining Bulb
+    host: !secret xiaomi_bulb_3
+    token: !secret xiaomi_bulb_3_token
+    model: philips.light.bulb
+  
+  - platform: xiaomi_miio
+    name: Hall Bulb
+    host: !secret xiaomi_bulb_4
+    token: !secret xiaomi_bulb_4_token
+    model: philips.light.bulb
+  
+  - platform: xiaomi_miio
+    name: Bedroom Bulb
+    host: !secret xiaomi_bulb_5
+    token: !secret xiaomi_bulb_5_token
+    model: philips.light.bulb
+
+#################################################################
+#                                                               #
+#                            Scenes                             #
+#                                                               #
+#################################################################
+
+scene:
+
+  - name: Livingroom normal
+    entities:
+      light.lounge_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 75
+        color_temp: 280
+      light.dining_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 85
+        color_temp: 333
+          
+  - name: Livingroom dim
+    entities:
+      light.lounge_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 15
+        color_temp: 280
+      light.dining_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 25
+        color_temp: 333
+          
+  - name: Hall dim 
+    entities:
+      light.hall_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 15
+          
+  - name: Hall normal 
+    entities:
+      light.hall_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 75
+          
+  - name: Hall dusk 
+    entities:
+      light.hall_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 50
+          
+  - name: Livingroom Bright
+    entities:
+      light.dining_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 100
+        color_temp: 175
+      light.lounge_bulb:
+        state: on
+        transition: 2
+        brightness_pct: 100
+        color_temp: 175
+          
+  - name: Backlights Night
+    entities:
+      light.gateway_light_7811dcfd812f:
+        state: on
+        brightness: 255
+        rgb_color: [0,0,255]
+      light.gateway_light_7811dce13ad6:
+        state: on
+        brightness: 255
+        rgb_color: [0,0,255]
+        
+  - name: Office Test
+    entities:
+      light.gateway_light_7811dcfd812f:
+        state: on
+        brightness: 255
+        rgb_color: [255,0,0]
+      light.gateway_light_7811dce13ad6:
+        state: on
+        brightness: 255
+        rgb_color: [255,0,0]
+        
+#################################################################
+#                                                               #
+#                           Yeelight                            #
+#                                                               #
+#################################################################
+
+yeelight:
+  devices:
+    10.0.50.7:
+      name: Patio Bulb
+      model: color1
+        
+    10.0.50.2:
+      name: Lounge Bulb
+      model: color1
+
+#################################################################
+#                                                               #
+#                         Automations                           #
+#                                                               #
+#################################################################
+
+## Some automations for this package have now been moved to Node-RED please see Node-Red Flows folder within this package for more infomation! ##
+
+automation:
+  - alias: Lounge Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.lounge_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.lounge_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Dining Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.dining_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.dining_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Hall Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.hall_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.hall_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Bedroom Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.bedroom_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.bedroom_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Gateway 1 Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.gateway1_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.gateway_light_7811dcfd812f
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Gateway 2 Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.gateway2_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.gateway_light_7811dce13ad6
+          brightness: "{{ trigger.to_state.state | int }}"
+
+
+automation:
+  - alias: Lounge Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.lounge_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.lounge_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Dining Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.dining_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.dining_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Hall Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.hall_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.hall_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Bedroom Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.bedroom_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.bedroom_bulb
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Gateway 1 Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.gateway1_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.gateway_light_7811dcfd812f
+          brightness: "{{ trigger.to_state.state | int }}"
+          
+  - alias: Gateway 2 Light - Adjust Brightness
+    trigger:
+      platform: state
+      entity_id: input_number.gateway2_brightness
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.gateway_light_7811dce13ad6
+          brightness: "{{ trigger.to_state.state | int }}"

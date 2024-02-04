@@ -1,0 +1,168 @@
+#################################################################
+#                                                               #
+#                     Packages/Info Sensors                     #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    sensor.aud_usd:
+      icon: mdi:home-currency-usd
+      friendly_name: "AUD to USD"
+    sensor.gbp_usd:
+      icon: mdi:home-currency-usd
+      friendly_name: "USD to GBP"
+    sensor.aud_to_gbp:
+      icon: mdi:currency-usd
+    sensor.aud_to_usd:
+      icon: mdi:currency-usd
+    sensor.bitcoin_round:
+      icon: mdi:bitcoin
+    sensor.stats_tv:
+      icon: mdi:theater
+      friendly_name: 'TV (7 days)' 
+    sensor.stats_work:
+      icon: mdi:domain
+      friendly_name: 'Working (7 days)'
+    sensor.aftership_intransit:
+      icon: mdi:truck-delivery
+    sensor.aftership_delivered:
+      icon: mdi:package-variant  
+
+#################################################################
+#                                                               #
+#                            Groups                             #
+#                                                               #
+#################################################################
+
+group:
+  currency:
+    name: Currency
+    view: no
+    entities:
+      - sensor.aud_to_usd
+      - sensor.aud_to_gbp
+      - sensor.bitcoin_round
+      
+  stats:
+    name: Stats
+    view: no
+    entities:
+      - sensor.stats_tv
+      - sensor.stats_work
+
+#################################################################
+#                                                               #
+#                          Sensors                              #
+#                                                               #
+################################################################# 
+
+sensor: 
+
+####################################################
+#                                                  #
+#               Sensors - Aftership                #
+#                                                  #
+#################################################### 
+
+  - platform: aftership
+    api_key: !secret aftership_key
+    
+####################################################
+#                                                  #
+#             Sensors - Alpha Vantage              #
+#                                                  #
+#################################################### 
+
+  - platform: alpha_vantage
+    api_key: !secret alphavantage_key
+    foreign_exchange:
+      - from: AUD
+        to: USD
+        name: AUD_USD
+      - from: USD
+        to: GBP
+        name: USD_GBP
+      - from: BTC
+        to: AUD
+        name: Bitcoin
+
+####################################################
+#                                                  #
+#                Sensors - Gearbest                #
+#                                                  #
+####################################################
+
+  - platform: gearbest
+    currency: AUD
+    items:
+      - url: https://www.gearbest.com/scooters-and-wheels/pp_974668.html?wid=1349303
+        name: Xiaomi Scooter M365
+        
+####################################################
+#                                                  #
+#             Sensors - History Stats              #
+#                                                  #
+####################################################
+
+  - platform: history_stats
+    name: stats_tv
+    entity_id: media_player.media_4k_tv
+    state: 'on'
+    type: time
+    end: '{{ now() }}'
+    duration:
+      days: 7
+   
+  - platform: history_stats
+    name: stats_work
+    entity_id: sensor.james
+    state: 'Powertec'
+    type: time
+    end: '{{ now() }}'
+    duration:
+      days: 7
+        
+####################################################
+#                                                  #
+#                Sensors - Template                #
+#                                                  #
+####################################################
+        
+## AUS to GBP Conversion - Did this as for some reason alpha vantage doesn't provide AUD to GBP Rates propably due to being USD based site
+  - platform: template
+    sensors:
+      aud_to_gbp:
+        unit_of_measurement: 'GBP'
+        value_template: "{{ (states('sensor.aud_to_usd')|float * states('sensor.usd_to_gbp')|float)|round(2) }}"
+        friendly_name: 'AUD to GBP'
+      aud_to_usd:
+        unit_of_measurement: 'USD'
+        value_template: "{{ states.sensor.aud_usd.state|round(2) }}"
+        friendly_name: 'AUD to USD'
+      usd_to_gbp:
+        unit_of_measurement: 'USD'
+        value_template: "{{ states.sensor.usd_gbp.state|round(2) }}"
+        friendly_name: 'USD to GBP'
+      bitcoin_round:
+        unit_of_measurement: 'AUD'
+        value_template: "{{ states.sensor.bitcoin.state|round }}"
+        friendly_name: 'Bitcoin'
+        
+      persistant_notification:
+        friendly_name: "Persistant Notification State"
+        value_template: "{{ states.persistent_notification.notification.attributes.message.split(' ')[0] }}"
+        
+      aftership_delivered:
+        friendly_name: "Delivered Packages"
+        value_template: "{{states.sensor.aftership.attributes.delivered}}"
+        
+      aftership_intransit:
+        friendly_name: "In Transit Packages"
+        value_template: "{{states.sensor.aftership.attributes.intransit}}"

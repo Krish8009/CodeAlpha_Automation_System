@@ -1,0 +1,101 @@
+#################################################################
+#                                                               #
+#                    Packages/Coffee Machine                    #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    sensor.coffee_water_level_monitor:
+      icon: mdi:coffee
+      
+#################################################################
+#                                                               #
+#                           Groups                              #
+#                                                               #
+#################################################################
+
+group:
+  kitchen:
+    name: Kitchen
+    view: no
+    entities:
+      - sensor.coffee_water_level_monitor
+
+#################################################################
+#                                                               #
+#                           Sensors                             #
+#                                                               #
+#################################################################
+
+sensor: 
+
+####################################################
+#                                                  #
+#                  Sensors - MQTT                  #
+#                                                  #
+####################################################
+
+  - platform: mqtt
+    name: "Coffee Water Level Monitor"
+    state_topic: "cmwaterlevel"
+    
+  - platform: mqtt
+    name: "Coffee Pods Organic"
+    state_topic: "cmpodsorg"
+    
+  - platform: mqtt
+    name: "Coffee Pods Caramel"
+    state_topic: "cmpodscar"
+    
+  - platform: mqtt
+    name: "Used Coffee Pod Level Monitor"
+    state_topic: "cmpodsused"
+
+#################################################################
+#                                                               #
+#                       Template Sensors                        #
+#                                                               #
+################################################################# 
+   
+  - platform: template
+    sensors:
+## Water Level
+      coffee_water_level_perc:
+        value_template: '{{ 100 - ((states.sensor.coffee_water_level_monitor.state|int / 22) * 100)|round(0) }}'
+        friendly_name: 'Memory'
+        
+      used_coffee_pod_level_perc:
+        value_template: '{{ 100 - ((states.sensor.used_coffee_pod_level_monitor.state|int / 14) * 100)|round(0) }}'
+        friendly_name: 'Memory'
+        
+#################################################################
+#                                                               #
+#                         Automations                           #
+#                                                               #
+#################################################################
+
+
+## Once my Good Morning script kicks in this automation will check the water level in the coffee machine and tell me if I need to fill up the water reservoir
+ 
+automation:
+  - alias: 'Coffee Machine Water Refill'
+    trigger:
+    - platform: state
+      entity_id: input_boolean.morning_script_run
+      to: 'off'
+    condition:
+    - condition: state
+      entity_id: sensor.coffee_water_level_monitor
+      state: empty
+    action:
+    - service: tts.google_say
+      data:
+        message: "Coffee Machine Water Requires Refilling."
+        entity_id: media_player.tts_kodi

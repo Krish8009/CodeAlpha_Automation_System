@@ -1,0 +1,655 @@
+#################################################################
+#                                                               #
+#                     Packages/Appliances                       #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    binary_sensor.door_window_sensor_158d0001e73a83:
+      friendly_name: Washing Machine Door
+      icon: mdi:door
+    switch.plug_158d0001bc2b6d:
+      friendly_name: Washing Machine
+      initial_state: on
+      icon: mdi:washing-machine
+    sensor.washing_machine_status:
+      icon: mdi:washing-machine
+    binary_sensor.door_window_sensor_158d0001e73bc5:
+      friendly_name: Dryer Door
+      icon: mdi:door
+    switch.plug_158d00022ae069:
+      friendly_name: Dryer
+      initial_state: on
+      icon: mdi:tumble-dryer
+    sensor.dryer_status:
+      icon: mdi:tumble-dryer
+    switch.plug_158d00022ae22d:
+      friendly_name: Appliances
+      initial_state: off
+      icon: mdi:power-plug
+    sensor.robovac_cleaning_time:
+      icon: mdi:clock-outline
+    sensor.robovac_main_brush:
+      icon: mdi:blender
+    sensor.robovac_side_brush:
+      icon: mdi:blender
+    sensor.robovac_filter:
+      icon: mdi:filter
+    sensor.robovac_cleaning_count:
+      icon: mdi:counter
+      
+#################################################################
+#                                                               #
+#                            Groups                             #
+#                                                               #
+#################################################################      
+      
+group:
+  washing_machine:
+    name: Washing Machine
+    view: no
+    control: hidden
+    entities:
+      - switch.plug_158d0001bc2b6d
+      - sensor.washing_machine_status
+      - binary_sensor.door_window_sensor_158d0001e73a83
+      
+  dryer:
+    name: Dryer
+    view: no
+    control: hidden
+    entities:    
+      - switch.plug_158d00022ae069
+      - sensor.dryer_status
+      - binary_sensor.door_window_sensor_158d0001e73bc5
+      
+  laundry:
+    name: Laundry
+    view: no
+    control: hidden
+    entities:
+      - switch.plug_158d00022ae22d
+      #- vacuum.robovac
+    
+  robovac:
+    name: Robovac
+    view: no
+    control: hidden 
+    entities:
+      - vacuum.robovac  
+      - sensor.robovac_status 
+      - sensor.robovac_battery
+      - sensor.robovac_cleaning_time
+      - sensor.robovac_main_brush
+      - sensor.robovac_side_brush
+      - sensor.robovac_filter
+      - sensor.robovac_cleaning_count      
+      
+#################################################################
+#                                                               #
+#                            Inputs                             #
+#                                                               #
+#################################################################  
+
+input_boolean:
+  disable_washing_machine_notification:
+    name: Disable Washing Machine Notification
+    initial: off
+    icon: mdi:washing-machine  
+    
+  disable_dryer_notification:
+    name: Disable Dryer Notification
+    initial: off
+    icon: mdi:tumble-dryer
+    
+input_select:
+  washing_machine_status:
+    name: Washing Machine Status
+    options:
+      - Idle
+      - Running
+      - Finishing
+      - Clean
+    initial: Idle
+
+  dryer_status:
+    name: Dryer Status
+    options:
+      - Idle
+      - Running
+      - Finishing
+      - Clean
+    initial: Idle
+    
+#################################################################
+#                                                               #
+#                           Sensors                             #
+#                                                               #
+#################################################################  
+
+sensor:
+
+####################################################
+#                                                  #
+#                Sensors - Template                #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+## Washing Machine Status
+      washing_machine_status:
+        value_template: '{{ states.input_select.washing_machine_status.state}}'
+        friendly_name: 'Washing Machine Status'
+## Washing Machine Power Usage
+      waching_machine_power:
+        value_template: '{{ states.switch.plug_158d0001bc2b6d.attributes.load_power|int }}'  
+        friendly_name: 'Washing Machine Power' 
+## Dryer Status
+      dryer_status:
+        value_template: '{{ states.input_select.dryer_status.state}}'
+        friendly_name: 'Dryer Status'
+## Dryer Power Usage
+      dryer_power:
+        value_template: '{{ states.switch.plug_158d00022ae069.attributes.load_power|int }}'  
+        friendly_name: 'Dryer Power'     
+
+#### Lovelace-UI ####
+
+## Washer Power Graph
+      waching_machine_load:
+        value_template: 'Power: {{ states.switch.plug_158d0001bc2b6d.attributes.load_power|int }}'  
+        friendly_name: 'Washer Power' 
+        unit_of_measurement: 'W'
+## Washer Status
+      washer_status:
+        value_template: 'Washer: {{ states.input_select.washing_machine_status.state}}'
+        friendly_name: 'Washing Machine Status'
+## Dryer Power Graph
+      dryer_load:
+        value_template: 'Power: {{ states.switch.plug_158d00022ae069.attributes.load_power|int }}'  
+        friendly_name: 'Dryer Power'  
+        unit_of_measurement: 'W'   
+## Dryer Status
+      clothes_dryer_status:
+        value_template: 'Dryer: {{ states.input_select.dryer_status.state}}'
+        friendly_name: 'Dryer Status'        
+## Appliance Power Usage
+      appliance_load:
+        value_template: '{{ states.switch.plug_158d00022ae22d.attributes.load_power|int }}'
+        friendly_name: 'Appliance Power'
+        unit_of_measurement: 'W'
+## Robovac Things
+      robovac_status:
+        friendly_name: "Status"
+        value_template: "{{ states.vacuum.robovac.attributes.status }}"
+        icon_template: >-
+          {% if is_state('sensor.robovac_status', 'Cleaning') %}
+            mdi:robot-vacuum
+          {% elif is_state('sensor.robovac_status', 'Returning home') %}
+            mdi:home
+          {% elif is_state('sensor.robovac_status', 'Charging') %}
+            mdi:battery-charging-wireless
+          {% elif is_state('sensor.robovac_status', 'Idle') %}
+            mdi:sleep
+          {% elif is_state('sensor.robovac_status', 'Error') %}
+            mdi:alert
+          {% elif is_state('sensor.robovac_status', 'Charger disconnected') %}
+            mdi:power-plug-off
+          {% else %}
+            mdi:help-circle
+          {% endif %}
+      robovac_battery:
+        friendly_name: "Battery"
+        unit_of_measurement: "%"
+        device_class: battery
+        value_template: "{{ states.vacuum.robovac.attributes.battery_level }}"
+      robovac_cleaning_time:
+        friendly_name: "Cleaning Time"
+        unit_of_measurement: "Mins"
+        value_template: "{{ states.vacuum.robovac.attributes.cleaning_time }}"
+      robovac_main_brush:
+        friendly_name: "Main Brush Left"
+        unit_of_measurement: "Hrs"
+        value_template: "{{ states.vacuum.robovac.attributes.main_brush_left }}"
+      robovac_side_brush:
+        friendly_name: "Side Brush Left"
+        unit_of_measurement: "Hrs"
+        value_template: "{{ states.vacuum.robovac.attributes.side_brush_left }}"
+      robovac_filter:
+        friendly_name: "Filter Left"
+        unit_of_measurement: "Hrs"
+        value_template: "{{ states.vacuum.robovac.attributes.filter_left }}"
+      robovac_cleaning_count:
+        friendly_name: "Cleaning Count"
+        value_template: "{{ states.vacuum.robovac.attributes.cleaning_count }}"
+      robovac_cleaned_area:
+        friendly_name: "Cleaned Area"
+        value_template: "{{ states.vacuum.robovac.attributes.cleaned_area }}"
+      robovac_total_clean_time:
+        friendly_name: "Total Clean Time"
+        unit_of_measurement: "Mins"
+        value_template: "{{ states.vacuum.robovac.attributes.total_cleaning_time }}"
+      robovac_sensor_dirty:
+        friendly_name: "Dirty Sensor"
+        unit_of_measurement: "Hrs"
+        value_template: "{{ states.vacuum.robovac.attributes.sensor_dirty_left }}"
+        
+      appliance_last_week:
+        value_template: "{{ states.sensor.weekly_appliance.attributes.last_period }}"
+        friendly_name: 'Last Week'
+        
+      appliance_last_month:
+        value_template: "{{ states.sensor.monthly_appliance.attributes.last_period }}"
+        friendly_name: 'Last Month'
+          
+      washer_door_status:
+        friendly_name: Door
+        entity_id: binary_sensor.door_window_sensor_158d0001e73a83
+        value_template: >-
+          {% if is_state('binary_sensor.door_window_sensor_158d0001e73a83', 'on') %}
+            Open
+          {% elif is_state('binary_sensor.door_window_sensor_158d0001e73a83', 'off') %}
+            Closed
+          {% endif %}
+          
+      dryer_door_status:
+        friendly_name: Door
+        entity_id: binary_sensor.door_window_sensor_158d0001e73bc5
+        value_template: >-
+          {% if is_state('binary_sensor.door_window_sensor_158d0001e73bc5', 'on') %}
+            Open
+          {% elif is_state('binary_sensor.door_window_sensor_158d0001e73bc5', 'off') %}
+            Closed
+          {% endif %}
+        
+#################################################################
+#                                                               #
+#                        Utility Meter                          #
+#                                                               #
+################################################################# 
+
+utility_meter:
+  weekly_appliance:
+    source: sensor.appliance_consumption
+    cycle: weekly
+    
+  monthly_appliance:
+    source: sensor.appliance_consumption
+    cycle: monthly
+    
+#################################################################
+#                                                               #
+#                           Vacuums                             #
+#                                                               #
+#################################################################
+
+vacuum:
+
+####################################################
+#                                                  #
+#                 Vacuums - Xiaomi                 #
+#                                                  #
+####################################################
+
+  - platform: xiaomi_miio
+    host: !secret xiaomi_vac_ip
+    token: !secret xiaomi_vac_token
+    name: RoboVac
+  
+#################################################################
+#                                                               #
+#                         Automations                           #
+#                                                               #
+#################################################################
+
+## All automations for this package have now been moved to Node-RED please see Node-Red Flows folder within this package for more infomation! ##
+
+#################################################################
+#                                                               #
+#                      Automations - Legacy                     #
+#                                                               #
+################################################################# 
+
+##                 [Last Validated  - v 0.79.1]                ##
+
+automation:
+## When power is detected, and the washing machine is not in
+## the Running state, change the status of the washing machine
+## to Running.
+## The status check will ensure we don't try to put the state
+## to Running each time the power level changes, and we're already
+## in the Running state. 
+
+  - alias: Set washing machine active when power detected
+    trigger:
+      - platform: numeric_state
+        entity_id: switch.plug_158d0001bc2b6d
+        value_template: '{{ state.attributes.load_power }}'
+        above: 10
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.washing_machine_status
+          state: Idle
+        - condition: state
+          entity_id: sensor.washing_machine_status
+          state: Clean
+        - condition: state
+          entity_id: sensor.washing_machine_status
+          state: Finishing
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Running
+          
+## When the power drops, move the state of the washing machine to
+## Finishing.
+
+  - alias: Set washing machine finished when power drops
+    trigger:
+      - platform: numeric_state
+        entity_id: switch.plug_158d0001bc2b6d
+        value_template: '{{ state.attributes.load_power }}'
+        below: 6
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: Running
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Finishing
+          
+## Wait 1 minutes for us to be in the Finishing state before we
+## decide the washing machine has finished. This way, if the
+## washing machine is in between cycles and the power drops, we
+## won't mark the washing machine cycle as finished too early.
+
+  - alias: Set washing machine clean after timeout
+    trigger:
+      - platform: state
+        entity_id: input_select.washing_machine_status
+        to: Finishing
+        for:
+          minutes: 1
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: Finishing
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Clean
+          
+## When we open the washing machine door, reset the status back to
+## idle, so we don't spam people that the washing machine has
+## finished, and someone has already emptied it
+
+  - alias: Set washing machine dirty when door opens
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.door_window_sensor_158d0001e73a83
+        to: 'on'
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: Clean
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: Finishing
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Idle
+          
+## Washing Machine Alerts
+  - alias: Send alert when washing machine is finished
+    trigger:
+      - platform: state
+        entity_id: sensor.washing_machine_status
+        to: Clean
+        for:
+          minutes: 1
+      - platform: state
+        entity_id: device_tracker.admin_samsung
+        to: 'home'
+        for:
+          minutes: 2
+      - platform: state
+        entity_id: device_tracker.admin_iphone
+        to: 'home'
+        for:
+          minutes: 2
+      - platform: time
+        at: '20:45:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          before: '21:00:00'
+          after: '08:30:00'
+        - condition: state
+          entity_id: group.family
+          state: 'home'
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: Clean
+        - condition: state
+          entity_id: input_boolean.disable_washing_machine_notification
+          state: 'off'
+        - condition: template
+          value_template: >
+            {% if states.automation.send_alert_when_washing_machine_is_finished.last_triggered is not none %}
+              {% if as_timestamp(now()) | int   -  as_timestamp(states.automation.send_alert_when_washing_machine_is_finished.attributes.last_triggered) | int > 1800 %} true {% else %} false
+              {% endif %}
+            {% else %}
+            false
+            {% endif %}
+    action:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.tts_kodi
+          message: 'The washing machine has finished and is ready to be emptied'
+      - service: notify.pushbullet
+        data:
+          message: 'The washing machine has finished and is ready to be emptied'        
+## When power is detected, and the dryer is not in
+## the Running state, change the status of the dryer
+## to Running.
+## The status check will ensure we don't try to put the state
+## to Running each time the power level changes, and we're already
+## in the Running state. 
+
+  - alias: Set dryer active when power detected
+    trigger:
+      - platform: numeric_state
+        entity_id: switch.plug_158d00022ae069
+        value_template: '{{ state.attributes.load_power }}'
+        above: 10
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.dryer_status
+          state: Idle
+        - condition: state
+          entity_id: sensor.dryer_status
+          state: Clean
+        - condition: state
+          entity_id: sensor.dryer_status
+          state: Finishing
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: Running
+          
+## When the power drops, move the state of the dryer to
+## Finishing.
+
+  - alias: Set dryer finished when power drops
+    trigger:
+      - platform: numeric_state
+        entity_id: switch.plug_158d00022ae069
+        value_template: '{{ state.attributes.load_power }}'
+        below: 6
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.dryer_status
+          state: Running
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: Finishing
+          
+## Wait 1 minutes for us to be in the Finishing state before we
+## decide the dryer has finished. This way, if the
+## dryer is in between cycles and the power drops, we
+## won't mark the dryer cycle as finished too early.
+
+  - alias: Set dryer clean after timeout
+    trigger:
+      - platform: state
+        entity_id: input_select.dryer_status
+        to: Finishing
+        for:
+          minutes: 1
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.dryer_status
+          state: Finishing
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: Clean
+          
+## When we open the dryer door, reset the status back to
+## idle, so we don't spam people that the dryer has
+## finished, and someone has already emptied it
+
+  - alias: Set dryer dirty when door opens
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.door_window_sensor_158d0001e73bc5
+        to: 'on'
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.dryer_status
+          state: Clean
+        - condition: state
+          entity_id: input_select.dryer_status
+          state: Finishing
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_status
+          option: Idle
+          
+## Dryer Alerts
+  - alias: Send alert when dryer is finished
+    trigger:
+      - platform: state
+        entity_id: sensor.dryer_status
+        to: Clean
+        for:
+          minutes: 1
+      - platform: state
+        entity_id: device_tracker.admin_samsung
+        to: 'home'
+        for:
+          minutes: 2
+      - platform: state
+        entity_id: device_tracker.admin_iphone
+        to: 'home'
+        for:
+          minutes: 2
+      - platform: time
+        at: '20:45:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          before: '21:00:00'
+          after: '08:30:00'
+        - condition: state
+          entity_id: group.family
+          state: 'home'
+        - condition: state
+          entity_id: input_select.dryer_status
+          state: Clean
+        - condition: state
+          entity_id: input_boolean.disable_dryer_notification
+          state: 'off'
+        - condition: template
+          value_template: >
+            {% if states.automation.send_alert_when_washing_machine_is_finished.last_triggered is not none %}
+              {% if as_timestamp(now()) | int   -  as_timestamp(states.automation.send_alert_when_washing_machine_is_finished.attributes.last_triggered) | int > 1800 %} true {% else %} false
+              {% endif %}
+            {% else %}
+            false
+            {% endif %}
+    action:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.tts_kodi
+          message: 'The dryer has finished and is ready to be emptied'
+          
+## Charge Appliances overnight
+  - alias: Appliance Charging after Daily Clean
+    trigger:
+    - platform: state
+      entity_id: sensor.robovac_status
+      to: Returning home
+    action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.plug_158d00022ae22d
+
+## Turn off Appliance Charging
+  - alias: Turn off Appliance Charging after RoboVac Battery reaches 100%
+    trigger:
+    - platform: state
+      entity_id: sensor.robovac_battery
+      to: '100'
+    action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.plug_158d00022ae22d
+        
+## Robovac Error Notification
+  - alias: Robovac Error Notification
+    trigger:
+      platform: state
+      entity_id: sensor.robovac_status
+      to: Error
+    action:
+      - service: notify.pushbullet
+        data:
+          message: 'Attention - Robovac has got himself into a situation again'

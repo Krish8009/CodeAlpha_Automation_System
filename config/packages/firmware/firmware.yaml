@@ -1,0 +1,161 @@
+#################################################################
+#                                                               #
+#                      Packages/Firmware                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    sensor.potential_breaking_changes:
+      friendly_name: Potential Breaking Changes
+      
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
+
+group:
+  firmware:
+    name: Firmware Status
+    view: no
+    entities:
+      - binary_sensor.new_podcast_available
+      - binary_sensor.ha_update_available
+      - binary_sensor.new_routeros_available
+      - binary_sensor.sonoff_update_available
+
+
+####################################################
+#                                                  #
+#                 Breaking Changes                 #
+#                                                  #
+####################################################
+
+breaking_changes:
+      
+#################################################################
+#                                                               #
+#                        Input Boolean                          #
+#                                                               #
+#################################################################
+
+input_boolean:        
+  ha_update_available:
+    name: HA Update Avaiable
+    initial: off
+    icon: mdi:cloud-download
+    
+  new_podcast_available:
+    name: New Podcast Avaiable
+    initial: off
+    icon: mdi:podcast
+    
+  sonoff_update_available:
+    name: Sonoff Update Avaiable
+    initial: off
+    icon: mdi:lightbulb-on
+
+  new_routeros_available:
+    name: RouterOS Update Avaiable
+    initial: off
+    icon: mdi:router-wireless
+    
+#################################################################
+#                                                               #
+#                           Sensors                             #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                  HASSIO Version                  #
+#                                                  #
+####################################################
+
+## Check Latest HA Version
+  - platform: rest
+    resource: https://s3.amazonaws.com/hassio-version/stable.json
+    name: Latest HA Version
+    value_template: "{{ value_json.homeassistant.default }}"
+    scan_interval: 3600
+
+####################################################
+#                                                  #
+#                    HA Podcast                    #
+#                                                  #
+####################################################
+
+## Check Latest HA Podcast
+  - platform: scrape
+    resource: https://hasspodcast.io/feed/podcast
+    name: Latest HA Podcast
+    select: 'enclosure:nth-of-type(1)'
+    value_template: '{{ value.split("/")[7] }}'
+    attribute: url
+
+####################################################
+#                                                  #
+#                  Sonoff Version                  #
+#                                                  #
+####################################################
+
+## Check Latest Sonoff Firmware Version
+  - platform: command_line
+    name: Sonoff Firmware Version
+    command: /config/html/versionsonoffhtml.sh
+    scan_interval: 21600
+
+####################################################
+#                                                  #
+#                 RouterOS Version                 #
+#                                                  #
+#################################################### 
+
+## Check Latest Mikrotik Firmware
+  - platform: feedparser
+    name: Engineering Feed
+    feed_url: 'https://mikrotik.com/download.rss'
+    date_format: '%a, %b %d %I:%M %p'
+    inclusions:
+      - title
+      - link
+    exclusions:
+      - language
+      
+  - platform: template
+    sensors:
+      next_router_os_release:
+        value_template: >
+          {% set sorted_releases = states.sensor.engineering_feed.attributes | sort | reverse %}
+          {%- for release in sorted_releases if release | regex_match('.*\[Stable\].*') %}
+            {%- if loop.first %}
+              {{- release | replace('[Stable]','') }}
+            {%- endif %}
+          {%- endfor %}
+    
+## Check Installed RouterOS Version
+  - platform: snmp
+    host: 10.0.0.1
+    baseoid: 1.3.6.1.4.1.14988.1.1.4.4.0
+    name: Installed RouterOS
+
+  - platform: version
+  
+#################################################################
+#                                                               #
+#                         Automations                           #
+#                                                               #
+#################################################################
+
+## All automations for this package have now been moved to Node-RED please see Node-Red Flows folder within this package for more infomation! ##
+automation:
+

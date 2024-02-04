@@ -1,0 +1,137 @@
+#################################################################
+#                                                               #
+#                       Packages/Notify                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                           Notify                              #
+#                                                               #
+#################################################################
+
+notify:
+
+####################################################
+#                                                  #
+#                 Notify - Android                 #
+#                                                  #
+####################################################
+
+  - name: Galaxy_Tab_A_(2016)
+    platform: lannouncer
+    host: !secret galaxy_tab
+
+####################################################
+#                                                  #
+#               Notify - FCM-Android               #
+#                                                  #
+####################################################
+    
+  - name: Android
+    platform: fcm-android
+    
+####################################################
+#                                                  #
+#               Notify - Pushbullet                #
+#                                                  #
+####################################################
+
+  - name: Pushbullet
+    platform: pushbullet
+    api_key: !secret push_api
+    
+####################################################
+#                                                  #
+#                   Notify - Kodi                  #
+#                                                  #
+####################################################
+    
+  - platform: kodi
+    host: !secret notify_kodi_ip  
+    port: !secret notify_kodi_port                 
+    name: TTS_Kodi                    
+    username: !secret notify_kodi_user       
+    password: !secret notify_kodi_pass
+
+####################################################
+#                                                  #
+#                  Notify - Slack                  #
+#                                                  #
+####################################################
+
+  - name: Slack
+    platform: slack
+    api_key: !secret slack_api
+    default_channel: '#ha'
+
+#################################################################
+#                                                               #
+#                             TTS                               #
+#                                                               #
+#################################################################
+    
+#tts:
+#  - platform: google
+  
+#################################################################
+#                                                               #
+#                       Speech Scripts                          #
+#                                                               #
+#################################################################
+
+script:
+  james_briefing:
+    alias: James Briefing
+    sequence:
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.kingia_main_2
+          message: >
+            {% if now().strftime("%H")|int < 12 %}
+            Good morning James.
+            {% elif now().strftime("%H")|int < 18 %}
+            Good afternoon James.
+            {% else %}
+            Good evening James.
+            {% endif %}
+            It's currently {{states.sensor.temperature_158d0001f56350.state|round}} degrees outside. Today will be {{states.sensor.bom_gc_forecast_detailed_summary_0.state|replace(".", "")}} with a {{states.sensor.bom_gc_forecast_chance_of_rain_0.state}} percent chance of rain.
+            {% if now().strftime("%H")|int < 9 and now().strftime("%w")|int > 0and now().strftime("%w")|int < 6 %}
+            The current drive to Powertec in traffic is {{states.sensor.commute_to_work.state}}
+            {% endif %}
+
+## Need to add bus time until next one leaves into breifing and then add reminder TTS for those days            
+  tina_briefing:
+    alias: Tina Briefing
+    sequence:
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.kingia_main_2
+          message: >
+            {% if now().strftime("%H")|int < 12 %}
+            Good morning Tina.
+            {% elif now().strftime("%H")|int < 18 %}
+            Good afternoon Tina.
+            {% else %}
+            Good evening Tina.
+            {% endif %}
+            It's currently {{states.sensor.temperature_158d0001f56350.state|round}} degrees outside. Today will be {{states.sensor.bom_gc_forecast_detailed_summary_0.state|replace(".", "")}} with a {{states.sensor.bom_gc_forecast_chance_of_rain_0.state}} percent chance of rain.
+            {% if now().strftime("%H")|int < 9 and now().strftime("%w")|int > 0and now().strftime("%w")|int < 4 %}
+            Jackson has kindy today, the next bus will arrive in {{states.sensor.next_bus.state}}
+            {% endif %}
+            
+  overnight_briefing:
+    alias: Overnight Briefing
+    sequence:
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.kingia_main_2
+          message: >
+            {% if now().strftime("%H")|int < 12 %}
+            Good morning.
+            {% elif now().strftime("%H")|int < 18 %}
+            Good afternoon.
+            {% else %}
+            Good evening.
+            {% endif %}
+            It's currently {{states.sensor.temperature_158d0001f56350.state|round}} degrees outside. Overnight the temperature is expected to drop to {{states.sensor.bom_gc_forecast_min_temp_c_1}} degrees.
